@@ -1,6 +1,11 @@
 # Bracket Validator
 
-This is a .NET Core project that provides a utility to validate the order of brackets in a given string. It includes two methods for bracket validation: `ValidateBracketOrder` and `ValidateBracketOrderByRegex`.
+This is a .NET Core project that provides a utility to validate the order of brackets like (, ), {, }, [, or ] in a given string. 
+A sequence of square brackets is valid if the following conditions are met answered:
+   - Contains no unmatched brackets.
+   - The subset of brackets within the bounds of a matching pair of brackets is also a pair of matching square brackets.
+   
+It includes two methods for bracket validation: `ValidateBracketOrder` and `ValidateBracketOrderByRegex`.
 
 ## Table of Contents
 
@@ -13,8 +18,8 @@ This is a .NET Core project that provides a utility to validate the order of bra
 
 The project is organized as follows:
 
-- `BracketValidatorApp`: Contains the console application for validating bracket orders.
 - `BracketValidatorLibrary`: Contains the bracket validation logic shared by the console app and tests.
+- `BracketValidatorApp`: Contains the console application for validating bracket orders.
 - `BracketValidatorTests`: Contains xUnit tests for the bracket validation methods.
 - `BracketValidatorSolution.sln`: The solution file that includes all projects.
 
@@ -52,7 +57,13 @@ To run the tests for bracket validation, follow these steps:
    dotnet test
    ```
 
-   This will execute the xUnit tests in the `BracketValidatorTests` project.
+   This will execute the five xUnit tests in the `BracketValidatorTests` project.
+   
+   1º Test input (){}[] is valid
+   2º Test input [{()}](){} is valid
+   3º Test input []{() is not valid
+   4º Test input [{)] is not valid
+   5º Test is the performance comparison betwhen the two types.
 
 ## Performance Comparison
 
@@ -64,8 +75,8 @@ We have tested and compared the performance of two bracket validation methods: `
 
 We ran both methods with a large input string (containing more than a thousand brackets) and measured the elapsed time for validation. Here are the results:
 
-- `ValidateBracketOrder` Elapsed time: 4886 ms
-- `ValidateBracketOrderByRegex` Elapsed time: 3328771 ms
+- `ValidateBracketOrder` Elapsed time: 4886 tiks
+- `ValidateBracketOrderByRegex` Elapsed time: 3328771 tiks
 
 As you can see, the `ValidateBracketOrder` method significantly outperformed the `ValidateBracketOrderByRegex` method in terms of execution time with a large string.
 
